@@ -1,0 +1,88 @@
+*markdownrun.txt*                          MarkdownRun Plugin                            *markdownrun*
+
+MarkdownRun provides a foundation for executing commands from within Markdown.
+
+===============================================================================
+USAGE
+
+The plugin exposes basic informational commands and a Lua setup API.
+
+Commands:                                                   *markdownrun-commands*
+
+    :MarkdownRunInfo
+        Show plugin version and basic status.
+
+    :MarkdownRunDebug
+        Show current configuration (useful for troubleshooting).
+
+    :MarkdownRun
+        Execute the current markdown shell block under the cursor.
+        Default keymap: <leader>rm
+
+    :MarkdownRunNext[!]
+        Execute the next unexecuted shell block from the current cursor
+        position. With !, force re-execution even if already executed.
+
+    :MarkdownRunAll[!]
+        Execute all shell blocks in the file sequentially. Stops on first
+        error by default; with !, continues even on errors.
+
+    :MarkdownRunEnv
+        Show the current session's CWD and environment summary. If the cursor
+        is on a variable name, its value is displayed.
+
+    :MarkdownRunReset
+        Reset the current buffer's MarkdownRun session (CWD and environment).
+
+    :MarkdownRunToggleIndicators
+        Toggle the virtual text indicators shown next to code blocks.
+
+    :MarkdownRunQuickfix
+        Open the quickfix window populated with recent errors from executions.
+
+    :MarkdownRunOpenResult
+        Open a popup showing the last recorded result for the current block,
+        including stdout/stderr and artifact paths when applicable.
+
+    :MarkdownRunResync
+        Resynchronize the results sidecar with the current buffer's blocks by
+        removing entries whose block hashes are not present in the file.
+
+Lua API:                                                       *markdownrun-api*
+
+>lua
+require('markdownrun').setup({
+  debug = false,  -- Enable debug notifications
+})
+<
+
+===============================================================================
+INSTALLATION                                             *markdownrun-install*
+
+Using lazy.nvim:
+
+>lua
+{
+  "yourname/markdownrun.nvim",
+  config = function()
+    require("markdownrun").setup()
+  end,
+}
+<
+
+Using packer.nvim:
+
+>lua
+use({
+  "yourname/markdownrun.nvim",
+  config = function()
+    require("markdownrun").setup()
+  end,
+})
+<
+
+===============================================================================
+META
+
+Author: You
+License: MIT
